@@ -1,28 +1,21 @@
-import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Button from './components/button.js'
-import CodeInput from './components/codeInput.js'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Landing from './screens/landing.js';
+import CreateRoom from './screens/createRoom.js';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [value, setValue] = useState(' ')
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-    <View style={styles.buttonContainer}>
-      <CodeInput value={value} setValue={setValue}/>
-      <Button text="Ingresar" icon="enter" onPress={()=>{alert(`${value}`)}}/>
-      <Button text="Crear Sala" icon="create-outline" onPress={()=>{alert("hola grupo")}}/>
-    </View>
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Landing"
+            options={{ headerShown: false }}
+            component={Landing}
+            />
+          <Stack.Screen name="CreateRoom" options={{ headerShown: false }} component={CreateRoom} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
